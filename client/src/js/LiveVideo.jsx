@@ -10,10 +10,7 @@ export default function LiveVideo() {
   });
 
   let videoRef = useRef();
-  console.log("THIS COMPOTNENT VIEWR");
   useEffect(async () => {
-    console.log("INSIDE USE EFFECT");
-
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true,
@@ -31,33 +28,6 @@ export default function LiveVideo() {
 
     return () => {};
   });
-
-  // call.on('stream', (remoteStream) => {
-  //   // Show stream in some <video> element.
-  // 	navigator.mediaDevices.getUserMedia({video: true, audio: true}, (stream) => {
-  // 		const call = peer.call('another-peers-id', stream);
-  // 		call.on('stream', (remoteStream) => {
-  // 			// Show stream in some <video> element.
-  // 		});
-  // 	}, (err) => {
-  // 		console.error('Failed to get local stream', err);
-  // 	});
-
-  // 	peer.on("call", (call) => {
-  // 		getUserMedia(
-  // 			{ video: true, audio: true },
-  // 			(stream) => {
-  // 				call.answer(stream);
-
-  // 				call.on("stream", (remoteStream) => {
-  // 					// Show stream in some video/canvas element.
-  // 				});
-  // 			},
-  // 			console.error
-  // 		);
-  // 	});
-
-  // });
 
   return (
     <video

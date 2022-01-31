@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { ListGroup, InputGroup, FormControl, Button } from "react-bootstrap";
 
 export default function MeetingNotes(props) {
-  // const [meetingItems, meetingItems] = useState(null);
   const [newItemText, setNewItemText] = useState("");
+  const [indexSelected, setIndexSelected] = useState(0);
   const [allItems, setAllItems] = useState([
     "(0:00) Intro",
     "(2:00) Business Update",
@@ -14,6 +14,10 @@ export default function MeetingNotes(props) {
       props.socket.on("new-message", (data) => {
         console.log("NEW DATA", data);
         setAllItems(data);
+      });
+      props.socket.on("indexSelected", (data) => {
+        console.log("NEW DATA", data);
+        setIndexSelected(data);
       });
     }
     return () => {};
@@ -26,11 +30,20 @@ export default function MeetingNotes(props) {
         {allItems.map((item) => {
           return (
             <ListGroup.Item
+              active={allItems.indexOf(item) == indexSelected}
               key={item}
-              onClick={() => {
+              onClick={(e) => {
                 if (!props.isPresenter) {
                   return;
                 }
+
+                if (e.altKey) {
+                  let index = allItems.indexOf(item);
+                  setIndexSelected(index);
+                  props.socket.emit("indexSelected", index);
+                  return;
+                }
+
                 let newName = prompt("Enter new value");
                 let index = allItems.indexOf(item);
                 let newAllItems = allItems;

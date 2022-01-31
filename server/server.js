@@ -19,21 +19,17 @@ io.on('connection', (socket) => {
                 console.log("Got new messege")
                 socket.broadcast.emit('new-message', data);
         });
+        socket.on("indexSelected", (data) =>{
+                console.log("Got new messege")
+                socket.broadcast.emit('indexSelected', data);
+        });
       });
 
 
-// peerServer.on('connection', (client) => { console.log("NEW CONNECTIO N", client.getId(), client)});
 
 app.set("view engine", "ejs"); 
   
 app.use(express.static("client")); 
   
-// app.get("/" , (req,res)=>{
-// });
-  
 
 server.listen(3000)
-
-// app.listen(port, function(){
-//         console.log("Surf Board Server Started on port : ", port);
-// });

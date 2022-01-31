@@ -1,34 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Row,
-  Col,
-  // Grid,
-} from "react-bootstrap";
+import { Button, ButtonGroup, Container, Row, Col } from "react-bootstrap";
 import PresenterVideo from "./PresenterVideo.jsx";
 import LiveVideo from "./LiveVideo.jsx";
 import MeetingNotes from "./MeetingNotes.jsx";
-// import { io } from "socket.io-client";
 
 let socket = null;
 export default function App() {
   const [hasSetPresenterMode, setHasSetPresenterMode] = useState(false);
   const [presentorMode, setPresentorMode] = useState(false);
   const [connectedToScoket, setConnectedToScoket] = useState(false);
-  // const [socketConnection, setSocketConnection] = useState(null);
 
   useEffect(() => {
-    // setSocketConnection(socket);
-    //
     socket = io();
 
     socket.on("connect", () => {});
 
-    socket.on("new-message", (data) => {
-      console.log("GOT MESSAGE", data);
-    });
+    socket.on("new-message", (data) => {});
     setConnectedToScoket(true);
 
     return () => {};
@@ -49,7 +36,6 @@ export default function App() {
                   setPresentorMode(true);
                 }}
               >
-                {" "}
                 Presenter
               </Button>
               <Button
@@ -83,14 +69,6 @@ export default function App() {
         </Col>
         <Col>{presentorMode ? <PresenterVideo /> : <LiveVideo />}</Col>
       </Row>
-      {/* <Button
-        onClick={() => {
-          socket.emit("new-message", { data: "is this" });
-        }}
-      >
-        SEnd
-      </Button> */}
-      {/* <h1> Presentor mode: {presentorMode ? "True" : "False"}</h1> */}
     </div>
   );
 }

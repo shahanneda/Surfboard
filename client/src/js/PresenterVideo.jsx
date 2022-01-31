@@ -34,17 +34,7 @@ export default function PresenterVideo() {
     videoRef.current.srcObject = stream;
 
     call.answer(stream);
-
-    // call.on("stream", (remoteStream) => {
-    //   // Show stream in some video/canvas element.
-    // });
   });
-
-  // const CAPTURE_OPTIONS = {
-  //   audio: false,
-  //   video: { facingMode: "environment" },
-  // };
-
   return (
     <div>
       <video
