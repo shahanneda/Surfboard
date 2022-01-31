@@ -1,5 +1,6 @@
 import Peer from "peerjs";
 import React, { useRef, useState } from "react";
+import MeetingNotes from "./MeetingNotes.jsx";
 
 export default function PresenterVideo() {
   const peer = new Peer("presenter", {
@@ -36,12 +37,14 @@ export default function PresenterVideo() {
   // };
 
   return (
-    <video
-      ref={videoRef}
-      onCanPlay={() => videoRef.current.play()}
-      autoPlay
-      playsInline
-      muted
-    />
+    <div>
+      <video
+        ref={videoRef}
+        onCanPlay={() => videoRef.current.play()}
+        autoPlay
+        playsInline
+        muted
+      />
+    </div>
   );
 }
